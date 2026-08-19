@@ -1,0 +1,409 @@
+@import "tailwindcss";
+
+:root {
+  --background: #f7f5f0;
+  --foreground: #1c1a15;
+  --surface: #ffffff;
+  --surface-border: rgba(28, 26, 21, 0.09);
+  --accent: #b8862c;       /* gold */
+  --accent-2: #14532d;      /* felt green */
+  --accent-from: #14532d;
+  --accent-to: #1c6b3d;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #100f0c;
+    --foreground: #f2ede2;
+    --surface: #18160f;
+    --surface-border: rgba(242, 237, 226, 0.1);
+    --accent: #d4a445;
+    --accent-2: #1c6b3d;
+    --accent-from: #1c6b3d;
+    --accent-to: #0f4c2c;
+  }
+}
+
+/*
+ * Site background: a fixed (non-scrolling, non-tiling) stack so it never repeats or
+ * "seams" on tall pages — a dramatic chess photo, a checkerboard texture over it, then
+ * a theme-tinted wash on top so body text stays fully readable at any scroll position.
+ */
+body {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--background) 88%, transparent), color-mix(in oklab, var(--background) 88%, transparent)),
+    linear-gradient(45deg, color-mix(in oklab, var(--foreground) 5%, transparent) 25%, transparent 25%),
+    linear-gradient(-45deg, color-mix(in oklab, var(--foreground) 5%, transparent) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, color-mix(in oklab, var(--foreground) 5%, transparent) 75%),
+    linear-gradient(-45deg, transparent 75%, color-mix(in oklab, var(--foreground) 5%, transparent) 75%),
+    radial-gradient(1100px 550px at 8% -12%, color-mix(in oklab, var(--accent-2) 14%, transparent), transparent),
+    radial-gradient(900px 480px at 100% 0%, color-mix(in oklab, var(--accent) 10%, transparent), transparent),
+    url("https://imgs.search.brave.com/d5rEB95qhERCnz94JhQpzGLLAfRYcSlSMuLyF7NG9E0/rs:fit:500:0:1:0/g:ce/aHR0cHM6Ly90aHVt/YnMuZHJlYW1zdGlt/ZS5jb20vYi9kcmFt/YXRpYy1jaGVzcy1t/YXRjaC1maW5hbGUt/YmxhY2sta25pZ2h0/LXdoaXRlLWtpbmct/Y2luZW1hdGljLXNo/b3dpbmctdmljdG9y/aW91cy1kZWZlYXRl/ZC1pbnRlbnNlLWxp/Z2h0aW5nLTM1OTUw/MjA1OC5qcGc");
+  background-repeat: no-repeat, repeat, repeat, repeat, repeat, no-repeat, no-repeat, no-repeat;
+  background-position: 0 0, 0 0, 0 24px, 24px -24px, -24px 0px, 8% -12%, 100% 0%, center 30%;
+  background-size: auto, 46px 46px, 46px 46px, 46px 46px, 46px 46px, 1100px 550px, 900px 480px, cover;
+  background-attachment: fixed;
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), "Segoe UI", Arial, Helvetica, sans-serif;
+}
+
+h1, h2, .font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: color-mix(in oklab, var(--accent) 35%, transparent);
+}
+
+/* Checkerboard motif used on the homepage hero + auth screens. */
+.chess-pattern {
+  background-image:
+    linear-gradient(45deg, color-mix(in oklab, var(--foreground) 4%, transparent) 25%, transparent 25%),
+    linear-gradient(-45deg, color-mix(in oklab, var(--foreground) 4%, transparent) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, color-mix(in oklab, var(--foreground) 4%, transparent) 75%),
+    linear-gradient(-45deg, transparent 75%, color-mix(in oklab, var(--foreground) 4%, transparent) 75%);
+  background-size: 48px 48px;
+  background-position: 0 0, 0 24px, 24px -24px, -24px 0px;
+}
+
+/* Real light/dark checkerboard, used behind stat/hero panels. */
+.chess-board-tile {
+  background-image:
+    linear-gradient(45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+    linear-gradient(-45deg, rgba(255, 255, 255, 0.06) 25%, transparent 25%),
+    linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%),
+    linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.06) 75%);
+  background-size: 28px 28px;
+  background-position: 0 0, 0 14px, 14px -14px, -14px 0px;
+}
+
+.card-surface {
+  background: color-mix(in oklab, var(--surface) 92%, transparent);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.03), 0 8px 24px -16px rgba(0, 0, 0, 0.25);
+}
+
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+.pill-btn-primary {
+  background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+  color: white;
+  box-shadow: 0 6px 20px -8px color-mix(in oklab, var(--accent-2) 70%, transparent);
+}
+.pill-btn-primary:hover {
+  transform: translateY(-1px) scale(1.02);
+}
+
+.stat-chip {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.15rem;
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(4px);
+}
+
+@keyframes float-piece {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50% { transform: translateY(-8px) rotate(3deg); }
+}
+.float-piece {
+  animation: float-piece 6s ease-in-out infinite;
+}
+
+/* ---------- Nav ---------- */
+.brand-mark {
+  transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease;
+}
+.group:hover .brand-mark {
+  transform: rotate(-8deg) scale(1.08);
+  box-shadow: 0 8px 20px -6px color-mix(in oklab, var(--accent-2) 60%, transparent);
+}
+
+.nav-link {
+  transition: color 0.15s ease, background 0.15s ease;
+}
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 2px;
+  height: 2px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--accent-from), var(--accent-to));
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.2s ease;
+}
+.nav-link:hover {
+  color: var(--foreground);
+  background: color-mix(in oklab, var(--foreground) 5%, transparent);
+}
+.nav-link:hover::after {
+  transform: scaleX(1);
+}
+
+.icon-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 2rem;
+  width: 2rem;
+  border-radius: 9999px;
+  color: color-mix(in oklab, var(--foreground) 55%, transparent);
+  transition: background 0.15s ease, color 0.15s ease, transform 0.15s ease;
+}
+.icon-btn:hover {
+  background: color-mix(in oklab, var(--foreground) 8%, transparent);
+  color: var(--foreground);
+  transform: scale(1.06);
+}
+
+/* ---------- Dropdown ---------- */
+@keyframes dropdown-in {
+  from { opacity: 0; transform: translateY(-6px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.dropdown-panel {
+  animation: dropdown-in 0.16s cubic-bezier(0.2, 0.7, 0.3, 1);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 16px 40px -12px rgba(0, 0, 0, 0.3);
+}
+
+/* ---------- Modal ---------- */
+@keyframes modal-backdrop-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes modal-panel-in {
+  from { opacity: 0; transform: translateY(10px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.modal-backdrop {
+  background: color-mix(in oklab, black 55%, transparent);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  animation: modal-backdrop-in 0.18s ease;
+}
+.modal-panel {
+  animation: modal-panel-in 0.22s cubic-bezier(0.2, 0.8, 0.3, 1);
+  box-shadow: 0 24px 60px -18px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- Floating action button ---------- */
+@keyframes fab-pulse {
+  0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 45%, transparent); }
+  70% { box-shadow: 0 0 0 14px color-mix(in oklab, var(--accent) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 0%, transparent); }
+}
+.fab-btn {
+  position: fixed;
+  /* Always the gold gradient (not the theme-swapped --accent-from/to) — this button
+     uses dark text, so it must never end up dark-on-dark in the dark-mode green palette. */
+  background: linear-gradient(135deg, #fbbf24, #d97706);
+  background-size: 160% 160%;
+  background-position: 0% 50%;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 12px 34px -10px rgba(180, 120, 20, 0.55), 0 3px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.25s ease, background-position 0.4s ease;
+}
+.fab-ring {
+  animation: fab-pulse 2.6s ease-out infinite;
+}
+.fab-btn:hover {
+  transform: translateY(-4px) scale(1.06);
+  background-position: 100% 50%;
+  box-shadow: 0 20px 48px -12px color-mix(in oklab, var(--accent-2) 85%, transparent), 0 6px 16px rgba(0, 0, 0, 0.25);
+}
+.fab-btn:active {
+  transform: translateY(-1px) scale(1.01);
+}
+@media (max-width: 639px) {
+  .fab-btn {
+    padding: 0.9rem !important;
+  }
+}
+
+/* ---------- Buttons ---------- */
+.pill-btn:active {
+  transform: translateY(0) scale(0.98);
+}
+
+.pill-btn-ghost {
+  border: 1px solid var(--surface-border);
+  background: color-mix(in oklab, var(--surface) 70%, transparent);
+  color: var(--foreground);
+  transition: border-color 0.15s ease, background 0.15s ease, transform 0.15s ease;
+}
+.pill-btn-ghost:hover {
+  border-color: color-mix(in oklab, var(--foreground) 25%, transparent);
+  background: color-mix(in oklab, var(--foreground) 5%, transparent);
+  transform: translateY(-1px);
+}
+
+/* ---------- Cards ---------- */
+.card-surface {
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 18px 40px -18px rgba(0, 0, 0, 0.35);
+  border-color: color-mix(in oklab, var(--accent) 30%, var(--surface-border));
+}
+
+.featured-panel {
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 30px 60px -24px rgba(0, 0, 0, 0.5);
+}
+
+.icon-tile {
+  transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.25s ease;
+}
+.card-hover:hover .icon-tile {
+  transform: scale(1.08) rotate(-4deg);
+}
+
+/* ---------- Form fields ---------- */
+.field-input {
+  display: block;
+  width: 100%;
+  border-radius: 0.65rem;
+  border: 1px solid var(--surface-border);
+  background: color-mix(in oklab, var(--surface) 92%, transparent);
+  color: var(--foreground);
+  padding: 0.55rem 0.8rem;
+  font-size: 0.875rem;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+.field-input::placeholder {
+  color: color-mix(in oklab, var(--foreground) 40%, transparent);
+}
+.field-input:hover {
+  border-color: color-mix(in oklab, var(--foreground) 20%, var(--surface-border));
+}
+.field-input:focus {
+  outline: none;
+  border-color: color-mix(in oklab, var(--accent-2) 55%, transparent);
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-2) 18%, transparent);
+}
+
+select.field-input {
+  appearance: none;
+  -webkit-appearance: none;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23888888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M6 9l6 6 6-6'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 0.8rem center;
+  background-size: 1rem;
+  padding-right: 2.4rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease, background-color 0.15s ease, transform 0.15s ease;
+}
+select.field-input:hover {
+  border-color: color-mix(in oklab, var(--accent-2) 45%, var(--surface-border));
+  background-color: color-mix(in oklab, var(--accent-2) 4%, var(--surface));
+}
+select.field-input:focus {
+  box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent-2) 20%, transparent), 0 4px 14px -6px color-mix(in oklab, var(--accent-2) 40%, transparent);
+}
+select.field-input option {
+  background: var(--surface);
+  color: var(--foreground);
+}
+
+/* ---------- Segmented control (pill-button group standing in for a <select>) ---------- */
+.segmented {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.segmented-btn {
+  flex: 1;
+  min-width: max-content;
+  border-radius: 0.65rem;
+  border: 1px solid var(--surface-border);
+  background: color-mix(in oklab, var(--surface) 85%, transparent);
+  padding: 0.6rem 0.9rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: color-mix(in oklab, var(--foreground) 65%, transparent);
+  transition: all 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+  text-align: center;
+}
+.segmented-btn:hover {
+  transform: translateY(-1.5px);
+  border-color: color-mix(in oklab, var(--accent-2) 40%, var(--surface-border));
+  color: var(--foreground);
+}
+.segmented-btn[data-active="true"] {
+  border-color: transparent;
+  background: linear-gradient(135deg, var(--accent-from), var(--accent-to));
+  color: white;
+  box-shadow: 0 8px 20px -8px color-mix(in oklab, var(--accent-2) 70%, transparent);
+  transform: translateY(-1.5px);
+}
+
+/* ---------- Roadmap / match timeline ---------- */
+.roadmap {
+  position: relative;
+  padding-left: 1.75rem;
+}
+.roadmap::before {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  top: 0.4rem;
+  bottom: 0.4rem;
+  width: 2px;
+  background: linear-gradient(to bottom, color-mix(in oklab, var(--accent) 55%, transparent), color-mix(in oklab, var(--accent-2) 40%, transparent));
+}
+.roadmap-node {
+  position: relative;
+  margin-bottom: 1.75rem;
+}
+.roadmap-node:last-child {
+  margin-bottom: 0;
+}
+.roadmap-node::before {
+  content: "";
+  position: absolute;
+  left: -1.75rem;
+  top: 0.3rem;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-radius: 9999px;
+  background: var(--background);
+  border: 2px solid var(--accent);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 12%, transparent);
+}
+.roadmap-node[data-done="true"]::before {
+  background: var(--accent-2);
+  border-color: var(--accent-2);
+}
+
+/* ---------- Instagram ---------- */
+.instagram-btn {
+  background: linear-gradient(135deg, #feda75, #fa7e1e, #d62976, #962fbf, #4f5bd5);
+  background-size: 200% 200%;
+  box-shadow: 0 8px 22px -8px rgba(214, 41, 118, 0.45);
+}
+.instagram-btn:hover {
+  background-position: 100% 50%;
+}
