@@ -16,9 +16,15 @@ export default async function Home() {
   let pastTournaments = [];
   let recentMatches = [];
   let nameById = {};
+  let isLoggedIn = false;
 
   if (process.env.NEXT_PUBLIC_SUPABASE_URL) {
     const supabase = await createClient();
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
+    isLoggedIn = !!user;
+
     const [
       { data: profiles },
       { count: gameCount },
@@ -158,14 +164,13 @@ export default async function Home() {
               Upcoming Tournaments
             </h2>
             <Link
-              href="/tournaments"
+              href={isLoggedIn ? "/tournaments" : "/login"}
               className="group hidden items-center gap-1 text-sm font-medium text-amber-300/90 transition-colors hover:text-amber-200 sm:flex"
             >
               See all <ArrowRightIcon className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </div>
-
-          <UpcomingTournamentsPanel tournaments={upcomingTournaments} />
+          <UpcomingTournamentsPanel tournaments={upcomingTournaments} isLoggedIn={isLoggedIn} />
         </section>
 
         <div className="mt-10 grid grid-cols-1 gap-8 lg:grid-cols-2">
@@ -175,7 +180,7 @@ export default async function Home() {
                 <TrophyIcon className="h-4.5 w-4.5 text-amber-600 dark:text-amber-400" />
                 Past Champions
               </h2>
-              <Link href="/tournaments" className="group flex items-center gap-1 text-xs font-medium text-zinc-500 transition-colors hover:text-foreground">
+              <Link href={isLoggedIn ? "/tournaments" : "/login"} className="group flex items-center gap-1 text-xs font-medium text-zinc-500 transition-colors hover:text-foreground">
                 All <ArrowRightIcon className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
@@ -186,7 +191,7 @@ export default async function Home() {
                 pastTournaments.map((t) => (
                   <Link
                     key={t.id}
-                    href={`/tournaments/${t.id}`}
+                    href={isLoggedIn ? `/tournaments/${t.id}` : "/login"}
                     className="card-surface card-hover group flex items-center gap-3 rounded-xl p-4"
                   >
                     <span className="icon-tile flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-700/10 to-amber-500/10 text-amber-600 dark:text-amber-400">
@@ -210,7 +215,7 @@ export default async function Home() {
                 <SwordsIcon className="h-4.5 w-4.5 text-amber-600 dark:text-amber-400" />
                 Recent Matches
               </h2>
-              <Link href="/matches" className="group flex items-center gap-1 text-xs font-medium text-zinc-500 transition-colors hover:text-foreground">
+              <Link href={isLoggedIn ? "/matches" : "/login"} className="group flex items-center gap-1 text-xs font-medium text-zinc-500 transition-colors hover:text-foreground">
                 All <ArrowRightIcon className="h-3 w-3 transition-transform group-hover:translate-x-0.5" />
               </Link>
             </div>
@@ -221,7 +226,7 @@ export default async function Home() {
                 recentMatches.map((g) => (
                   <Link
                     key={g.id}
-                    href="/matches"
+                    href={isLoggedIn ? "/matches" : "/login"}
                     className="card-surface card-hover group flex items-center gap-3 rounded-xl p-4"
                   >
                     <span className="icon-tile flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-700/10 to-amber-500/10 text-emerald-700 dark:text-emerald-400">

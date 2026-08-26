@@ -10,7 +10,7 @@ const STATUS_STYLES = {
   live: "bg-red-500/20 text-red-300",
 };
 
-export default function UpcomingTournamentsPanel({ tournaments }) {
+export default function UpcomingTournamentsPanel({ tournaments, isLoggedIn }) {
   const [active, setActive] = useState(null);
 
   return (
@@ -21,27 +21,48 @@ export default function UpcomingTournamentsPanel({ tournaments }) {
             Nothing scheduled yet — check back soon.
           </p>
         ) : (
-          tournaments.map((t) => (
-            <button
-              key={t.id}
-              type="button"
-              onClick={() => setActive(t)}
-              className="group block rounded-2xl border border-white/10 bg-white/[.06] p-5 text-left backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-amber-400/30 hover:bg-white/[.1] hover:shadow-xl hover:shadow-black/20"
-            >
-              <span className={`inline-block rounded-full px-2.5 py-1 text-[11px] font-semibold capitalize ${STATUS_STYLES[t.status] ?? "bg-amber-400/15 text-amber-300"}`}>
-                {t.status}
-              </span>
-              <p className="font-display mt-3 text-lg font-semibold text-white">{t.name}</p>
-              <p className="mt-1.5 text-sm text-emerald-100/70">
-                {t.start_date}
-                {t.end_date && t.end_date !== t.start_date ? ` – ${t.end_date}` : ""} ·{" "}
-                <span className="capitalize">{t.time_control}</span>
-              </p>
-              <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-amber-300 transition-transform group-hover:translate-x-0.5">
-                View matches <ArrowRightIcon className="h-3.5 w-3.5" />
-              </span>
-            </button>
-          ))
+          tournaments.map((t) =>
+            isLoggedIn ? (
+              <button
+                key={t.id}
+                type="button"
+                onClick={() => setActive(t)}
+                className="group block rounded-2xl border border-white/10 bg-white/[.06] p-5 text-left backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-amber-400/30 hover:bg-white/[.1] hover:shadow-xl hover:shadow-black/20"
+              >
+                <span className={`inline-block rounded-full px-2.5 py-1 text-[11px] font-semibold capitalize ${STATUS_STYLES[t.status] ?? "bg-amber-400/15 text-amber-300"}`}>
+                  {t.status}
+                </span>
+                <p className="font-display mt-3 text-lg font-semibold text-white">{t.name}</p>
+                <p className="mt-1.5 text-sm text-emerald-100/70">
+                  {t.start_date}
+                  {t.end_date && t.end_date !== t.start_date ? ` – ${t.end_date}` : ""} ·{" "}
+                  <span className="capitalize">{t.time_control}</span>
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-amber-300 transition-transform group-hover:translate-x-0.5">
+                  View matches <ArrowRightIcon className="h-3.5 w-3.5" />
+                </span>
+              </button>
+            ) : (
+              <Link
+                key={t.id}
+                href="/login"
+                className="group block rounded-2xl border border-white/10 bg-white/[.06] p-5 text-left backdrop-blur-sm transition-all duration-200 hover:-translate-y-1 hover:border-amber-400/30 hover:bg-white/[.1] hover:shadow-xl hover:shadow-black/20"
+              >
+                <span className={`inline-block rounded-full px-2.5 py-1 text-[11px] font-semibold capitalize ${STATUS_STYLES[t.status] ?? "bg-amber-400/15 text-amber-300"}`}>
+                  {t.status}
+                </span>
+                <p className="font-display mt-3 text-lg font-semibold text-white">{t.name}</p>
+                <p className="mt-1.5 text-sm text-emerald-100/70">
+                  {t.start_date}
+                  {t.end_date && t.end_date !== t.start_date ? ` – ${t.end_date}` : ""} ·{" "}
+                  <span className="capitalize">{t.time_control}</span>
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-sm font-medium text-amber-300 transition-transform group-hover:translate-x-0.5">
+                  Sign in to view matches <ArrowRightIcon className="h-3.5 w-3.5" />
+                </span>
+              </Link>
+            )
+          )
         )}
       </div>
 
