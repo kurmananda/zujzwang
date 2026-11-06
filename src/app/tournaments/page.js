@@ -2,7 +2,7 @@ import Link from "next/link";
 import { createClient } from "@/lib/supabase/server";
 import { CalendarIcon, TrophyIcon, ArrowRightIcon } from "@/components/icons";
 
-export const metadata = { title: "Tournaments — Zujzwang Chess Club" };
+export const metadata = { title: "Tournaments — Zugzwang Chess Club" };
 
 export default async function TournamentsPage() {
   const supabase = await createClient();

@@ -23,8 +23,8 @@ const playfair = Playfair_Display({
 });
 
 export const metadata = {
-  title: "ZUJZWANG — College Chess Club",
-  description: "Zujzwang, the college chess club: ratings, tournaments, and friendly games for the campus chess community.",
+  title: "ZUGZWANG — College Chess Club",
+  description: "Zugzwang, the college chess club: ratings, tournaments, and friendly games for the campus chess community.",
 };
 
 export default function RootLayout({ children }) {

@@ -45,7 +45,7 @@ const PASSWORD = "seedpass123";
 async function chessComAvatar(username) {
   try {
     const res = await fetch(`https://api.chess.com/pub/player/${username}`, {
-      headers: { "User-Agent": "zujzwang-seed-script" },
+      headers: { "User-Agent": "zugzwang-seed-script" },
     });
     if (!res.ok) return null;
     const data = await res.json();

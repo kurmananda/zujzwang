@@ -7,7 +7,7 @@ import PlayerMultiSelect from "@/components/PlayerMultiSelect";
 import DateField from "@/components/DateField";
 import { LogOutIcon, TrophyIcon, SearchIcon } from "@/components/icons";
 
-const SESSION_KEY = "zujzwang_admin_unlocked";
+const SESSION_KEY = "zugzwang_admin_unlocked";
 
 const RESULT_STYLES = {
   white: "bg-zinc-200 text-zinc-800 dark:bg-zinc-700 dark:text-zinc-100",

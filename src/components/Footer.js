@@ -21,7 +21,7 @@ export default function Footer() {
               <span className="brand-mark flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-700 to-emerald-950 text-amber-300 shadow-sm shadow-emerald-900/30">
                 <KnightIcon className="h-5 w-5" />
               </span>
-              <span className="font-display text-lg">Zujzwang</span>
+              <span className="font-display text-lg">Zugzwang</span>
             </Link>
             <p className="mt-3 max-w-xs text-sm text-zinc-600 dark:text-zinc-400">
               The college chess club. One rating, earned over the board — Chess.com stats mirrored live, plus a
@@ -73,7 +73,7 @@ export default function Footer() {
         </div>
 
         <div className="mt-10 flex flex-col items-center gap-3 border-t border-black/[.06] pt-6 text-xs text-zinc-500 sm:flex-row sm:justify-between dark:border-white/[.07]">
-          <p>© {new Date().getFullYear()} Zujzwang Chess Club. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} Zugzwang Chess Club. All rights reserved.</p>
           <p className="flex items-center gap-1.5 text-zinc-400 dark:text-zinc-600">
             <span aria-hidden>♞</span> Play a real game. Earn a real rating.
           </p>

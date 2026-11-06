@@ -82,7 +82,7 @@ export default async function Home() {
             </span>
             <h1 className="font-display mt-5 text-5xl font-semibold leading-tight tracking-tight text-white sm:text-6xl">
               <span className="bg-gradient-to-r from-amber-300 to-amber-500 bg-clip-text text-transparent">
-                ZUJZWANG
+                ZUGZWANG
               </span>
             </h1>
             <p className="mt-4 max-w-lg text-lg text-emerald-100/80">

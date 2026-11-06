@@ -50,7 +50,7 @@ export default function SignupPage() {
   return (
     <div className="mx-auto max-w-md px-6 py-12">
       <div className="rounded-2xl border border-black/[.08] bg-white/60 p-8 shadow-sm backdrop-blur-sm dark:border-white/[.1] dark:bg-white/[.03]">
-        <h1 className="text-2xl font-semibold tracking-tight">Join Zujzwang</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">Join Zugzwang</h1>
         <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
           Join the college chess club. Your Chess.com username is verified live and its avatar becomes your
           profile photo — no separate photo upload needed.

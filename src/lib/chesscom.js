@@ -5,7 +5,7 @@ const BASE = "https://api.chess.com/pub/player";
 
 async function safeFetchJson(url) {
   const res = await fetch(url, {
-    headers: { "User-Agent": "zujzwang-chess-club-site" },
+    headers: { "User-Agent": "zugzwang-chess-club-site" },
     next: { revalidate: 300 }, // 5 min cache
   });
   if (!res.ok) return null;

@@ -3,7 +3,7 @@ import { getChessComRatings, getChessComAvatar } from "@/lib/chesscom";
 import RatingsExplorer from "@/components/RatingsExplorer";
 import { CrownIcon } from "@/components/icons";
 
-export const metadata = { title: "Ratings — Zujzwang Chess Club" };
+export const metadata = { title: "Ratings — Zugzwang Chess Club" };
 
 export default async function LeaderboardPage() {
   const supabase = await createClient();

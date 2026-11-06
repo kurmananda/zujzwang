@@ -33,7 +33,7 @@ export default function LoginPage() {
     <div className="mx-auto flex min-h-[calc(100vh-56px)] max-w-md items-center px-6 py-12">
       <div className="w-full rounded-2xl border border-black/[.08] bg-white/60 p-8 shadow-sm backdrop-blur-sm dark:border-white/[.1] dark:bg-white/[.03]">
         <h1 className="text-2xl font-semibold tracking-tight">Welcome back</h1>
-        <p className="mt-1 text-sm text-zinc-500">Log in to Zujzwang to report games and check ratings.</p>
+        <p className="mt-1 text-sm text-zinc-500">Log in to Zugzwang to report games and check ratings.</p>
 
         <form onSubmit={handleSubmit} className="mt-6 space-y-4">
           <div>

@@ -51,8 +51,8 @@ export default async function NavBar() {
           <span className="brand-mark flex h-9 w-9 items-center justify-center rounded-lg bg-gradient-to-br from-emerald-700 to-emerald-950 text-amber-300 shadow-sm shadow-emerald-900/30">
             <KnightIcon className="h-5 w-5" />
           </span>
-          <span className="font-display hidden sm:inline">Zujzwang Chess Club</span>
-          <span className="font-display sm:hidden">Zujzwang</span>
+          <span className="font-display hidden sm:inline">Zugzwang Chess Club</span>
+          <span className="font-display sm:hidden">Zugzwang</span>
         </Link>
 
         <nav className="hidden flex-wrap gap-x-1 text-sm text-zinc-600 md:flex dark:text-zinc-400">
